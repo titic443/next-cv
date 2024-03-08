@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,6 +13,58 @@ const links = [
 ];
 
 const Navbar = () => {
+  const listItemVariants = {
+    closed: {
+      x: -10,
+      opacity: 0,
+    },
+    opened: {
+      x: 0,
+      opacity: 1,
+    },
+  };
+
+  const listVariants = {
+    closed: {
+      x: "100vh",
+    },
+    opened: {
+      x: 0,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const topVariants = {
+    closed: {
+      rotate: 0,
+    },
+    opened: {
+      rotate: 45,
+      backgroundColor: "rgb(255,255,255)",
+    },
+  };
+
+  const centerVariants = {
+    closed: {
+      opacity: 1,
+    },
+    opened: {
+      opacity: 0,
+    },
+  };
+  const buttomVariants = {
+    closed: {
+      rotate: 0,
+    },
+    opened: {
+      rotate: -45,
+      backgroundColor: "rgb(255,255,255)",
+    },
+  };
+
   const [open, setOpen] = useState(false);
   return (
     <div className="h-full flex items-center justify-between px-4 sm:px-12 lg:px-20 xl:px-48 text-xl">
@@ -69,18 +122,43 @@ const Navbar = () => {
             })
           }
         >
-          <div className="w-10 h-1 bg-white rounded"></div>
-          <div className="w-10 h-1 bg-white rounded"></div>
-          <div className="w-10 h-1 bg-white rounded"></div>
+          <motion.div
+            variants={topVariants}
+            animate={open ? topVariants.opened : topVariants.closed}
+            className="w-10 h-1 bg-black rounded origin-left"
+          ></motion.div>
+          <motion.div
+            variants={centerVariants}
+            animate={open ? centerVariants.opened : centerVariants.closed}
+            className="w-10 h-1 bg-black rounded"
+          ></motion.div>
+          <motion.div
+            variants={buttomVariants}
+            animate={open ? buttomVariants.opened : buttomVariants.closed}
+            className="w-10 h-1 bg-black rounded origin-left"
+          ></motion.div>
         </button>
         {open && (
-          <div className="absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-4xl">
+          <motion.div
+            variants={listVariants}
+            initial="closed"
+            animate="opened"
+            className="z-40 absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-4xl"
+          >
             {links.map((link) => (
-              <Link href={link.url} key={link.title}>
-                {link.title}
-              </Link>
+              <motion.div
+                // inherit={listVariants}
+                variants={listItemVariants}
+                // initial="closed"
+                // animate="opened"
+                key={link.title}
+              >
+                <Link href={link.url} key={link.title}>
+                  {link.title}
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </div>
