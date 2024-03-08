@@ -67,7 +67,7 @@ const Navbar = () => {
 
   const [open, setOpen] = useState(false);
   return (
-    <div className="h-full flex items-center justify-between px-4 sm:px-12 lg:px-20 xl:px-48 text-xl">
+    <div className="h-full flex items-center justify-between px-4 sm:px-12 lg:px-20 xl:px-48 xl:text-xl">
       {/* Link */}
       <div className="hidden md:flex justify-between w-1/3">
         {links.map((link) => (
