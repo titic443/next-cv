@@ -6,9 +6,11 @@ import { useRef } from "react";
 
 function AboutPage() {
   const containerRef = useRef();
-  const skillRef = useRef();
   const { scrollYProgress } = useScroll({ container: containerRef });
+  const skillRef = useRef();
   const isSkillReview = useInView(skillRef, { once: true });
+  const experienceRef = useRef();
+  const isExperienceReview = useInView(experienceRef, { once: true });
   return (
     <motion.div
       className="h-full"
@@ -53,7 +55,7 @@ function AboutPage() {
               </svg>
             </div>
             {/* Scroll Svg */}
-            <svg
+            <motion.svg
               initial={{ opacity: 0.2, y: 0 }}
               animate={{ opacity: 1, y: "10px" }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -74,7 +76,7 @@ function AboutPage() {
                 stroke="#000000"
                 strokeWidth="1"
               ></path>
-            </svg>
+            </motion.svg>
           </div>
 
           {/* Skills */}
@@ -89,25 +91,30 @@ function AboutPage() {
               Skill
             </motion.h1>
             {/* Skill list */}
-            <div className="flex gap-4">
-              <div className="rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
+            <motion.div
+              initial={{ x: "-300px" }}
+              animate={isSkillReview ? { x: 0 } : {}}
+              transition={{ delay: 0.2 }}
+              className="flex gap-4"
+            >
+              <div className=" px-1 rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
                 JavaScript
               </div>
-              <div className="rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
+              <div className=" px-1 rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
                 TypeScript
               </div>
-              <div className="rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
+              <div className=" px-1 rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
                 Nextjs
               </div>
-              <div className="rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
+              <div className=" px-1 rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
                 Nestjs
               </div>
-              <div className="rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
+              <div className=" px-1 rounded text-white cursor-pointer bg-black text-sm hover:bg-white hover:text-black">
                 Golang
               </div>
-            </div>
+            </motion.div>
             {/* Skill Scholl SVG */}
-            <svg
+            <motion.svg
               initial={{ opacity: 0.2, y: 0 }}
               animate={{ opacity: 1, y: "10px" }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -128,46 +135,65 @@ function AboutPage() {
                 stroke="#000000"
                 strokeWidth="1"
               ></path>
-            </svg>
+            </motion.svg>
           </div>
           {/* Experience Container */}
-          <div className="flex flex-col gap-12 justify-center pb-48">
-            <h1 className="font-bold text-2xl">Experience</h1>
+          <div
+            className="flex flex-col gap-12 justify-center pb-48"
+            ref={experienceRef}
+          >
+            <motion.h1
+              initial={{ x: "-300px" }}
+              animate={isExperienceReview ? { x: 0 } : {}}
+              // transition={{ delay: 0.2 }}
+              className="font-bold text-2xl"
+            >
+              Experience
+            </motion.h1>
             {/* Experice List item*/}
-            <div className="flex justify-between">
+            <motion.div
+              initial={{ x: "-300px" }}
+              animate={isExperienceReview ? { x: 0 } : {}}
+              // transition={{ delay: 0.2 }}
+              className="flex justify-between"
+            >
               {/* LEFT */}
-              <div className="w-1/3 flex flex-col bg-red-200 gap-2">
-                {/* Job title */}
-                <div className="bg-white rounded-b-lg rounded-s-lg p-3 font-semibold">
-                  Backend Developer
+              <div className="w-1/3 flex flex-col  gap-40">
+                <div className="bg-red-200">
+                  {/* Job title */}
+                  <div className="bg-white rounded-b-lg rounded-s-lg p-3 font-semibold">
+                    Backend Developer
+                  </div>
+                  {/* Job Description */}
+                  <div className="p-3 text-sm italic">
+                    My current emplymenmt. May bettwe than the position before
+                  </div>
+                  {/* Job Date */}
+                  <div className=" p-3 text-red-400 text-sm font-semibold">
+                    2024 - Present{" "}
+                  </div>
+                  {/* Job Company */}
+                  <div className="p-1 bg-white text-sm font-semibold w-fit rounded">
+                    Enegy Absolute{" "}
+                  </div>
                 </div>
-                {/* Job Description */}
-                <div className="p-3 text-sm italic">
-                  My current emplymenmt. May bettwe than the position before
-                </div>
-                {/* Job Date */}
-                <div className=" p-3 text-red-400 text-sm font-semibold">
-                  2024 - Present{" "}
-                </div>
-                {/* Job Company */}
-                <div className="p-1 bg-white text-sm font-semibold w-fit rounded">
-                  Enegy Absolute{" "}
-                </div>
-                {/* Job title */}
-                <div className="bg-white rounded-b-lg rounded-s-lg p-3 font-semibold">
-                  Backend Developer
-                </div>
-                {/* Job Description */}
-                <div className="p-3 text-sm italic">
-                  My current emplymenmt. May bettwe than the position before
-                </div>
-                {/* Job Date */}
-                <div className=" p-3 text-red-400 text-sm font-semibold">
-                  2024 - Present{" "}
-                </div>
-                {/* Job Company */}
-                <div className="p-1 bg-white text-sm font-semibold w-fit rounded">
-                  Enegy Absolute{" "}
+                <div className="bg-red-200">
+                  {/* Job title */}
+                  <div className="bg-white rounded-b-lg rounded-s-lg p-3 font-semibold">
+                    Backend Developer
+                  </div>
+                  {/* Job Description */}
+                  <div className="p-3 text-sm italic">
+                    My current emplymenmt. May bettwe than the position before
+                  </div>
+                  {/* Job Date */}
+                  <div className=" p-3 text-red-400 text-sm font-semibold">
+                    2024 - Present{" "}
+                  </div>
+                  {/* Job Company */}
+                  <div className="p-1 bg-white text-sm font-semibold w-fit rounded">
+                    Enegy Absolute{" "}
+                  </div>
                 </div>
               </div>
 
@@ -177,10 +203,14 @@ function AboutPage() {
                 <div className="w-1 h-full bg-gray-500 rounded relative">
                   {/* CIRCLE */}
                   <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400  -left-2 bg-white "></div>
+                  {/* CIRCLE */}
+                  <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400  -left-2 top-[35%] bg-white "></div>
+                  {/* CIRCLE */}
+                  <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400  -left-2 top-[70%] bg-white "></div>
                 </div>
               </div>
               {/* RIGHT */}
-              <div className="w-1/3  bg-red-200">
+              <div className="w-1/3   flex flex-col justify-center bg-red-200 h-fit my-auto">
                 {/* Job title */}
                 <div className="bg-white rounded-b-lg rounded-s-lg p-3 font-semibold">
                   Backend Developer
@@ -198,7 +228,7 @@ function AboutPage() {
                   Enegy Absolute{" "}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="hidden lg:block w-1/3 sticky top-0 xl:w-1/2">
